@@ -9,6 +9,8 @@ public class MainTDDTest {
 
     @Test
     public void testMultiplication(){
-        assertTrue(true);
+        Dollar five = new Dollar(5);
+        five.times(2);
+        assertEquals(10, five.amount);
     }
 }
