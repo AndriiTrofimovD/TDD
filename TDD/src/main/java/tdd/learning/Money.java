@@ -3,7 +3,7 @@ package tdd.learning;
 /**
  * @author: Andrii Trofimov
  */
-abstract class Money {
+class Money {
     protected int amount;
     protected String currency;
 
@@ -18,10 +18,16 @@ abstract class Money {
 
     public boolean equals(Object object){
         Money money = (Money) object;
-        return this.amount == money.amount && this.getClass() == money.getClass();
+        return this.amount == money.amount && this.currency.equals(money.currency);
     }
 
-    abstract Money times(int multiplier);
+    public String toString(){
+        return amount + " " + currency;
+    }
+
+    Money times(int multiplier){
+        return new Money(amount * multiplier, currency);
+    }
 
     static Money dollar(int amount){
         return new Dollar(amount, "USD");
