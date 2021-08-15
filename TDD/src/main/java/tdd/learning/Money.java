@@ -3,7 +3,7 @@ package tdd.learning;
 /**
  * @author: Andrii Trofimov
  */
-class Money {
+class Money implements Expression{
     protected int amount;
     protected String currency;
 
@@ -16,6 +16,26 @@ class Money {
         return new Money(amount, "CHF");
     }
 
+    static Money dollar(int amount){
+        return new Money(amount, "USD");
+    }
+
+    Expression plus(Money addend) {
+        return new Sum(this, addend);
+    }
+
+    String currency(){
+        return currency;
+    }
+
+    Money times(int multiplier){
+        return new Money(amount * multiplier, currency);
+    }
+
+    public Money reduce(String to){
+        return this;
+    }
+
     public boolean equals(Object object){
         Money money = (Money) object;
         return this.amount == money.amount && this.currency.equals(money.currency);
@@ -23,17 +43,5 @@ class Money {
 
     public String toString(){
         return amount + " " + currency;
-    }
-
-    Money times(int multiplier){
-        return new Money(amount * multiplier, currency);
-    }
-
-    static Money dollar(int amount){
-        return new Money(amount, "USD");
-    }
-
-    String currency(){
-        return currency;
     }
 }
